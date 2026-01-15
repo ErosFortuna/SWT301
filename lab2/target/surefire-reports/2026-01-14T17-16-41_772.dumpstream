@@ -1,0 +1,5 @@
+# Created at 2026-01-14T17:16:41.930
+Boot Manifest-JAR contains absolute paths in classpath 'E:\file code\netbean\SWT\lab2\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
