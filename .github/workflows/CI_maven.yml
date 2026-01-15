@@ -1,0 +1,36 @@
+name: Math Utility Project (CI included) | © 2025 by hanhnt
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      working-directory: MathUtility
+      run: mvn -B clean package
+
+    - name: Distribute jar file
+      run: |
+        mkdir staging
+        cp MathUtility/target/*.jar staging
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: math-utility-1.0-SNAPSHOT
+        path: staging
