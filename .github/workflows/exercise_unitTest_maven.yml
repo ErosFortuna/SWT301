@@ -1,0 +1,35 @@
+name: exercise_unitTest Project CI | SWT301
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "lab2/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "lab2/**"
+
+jobs:
+  build-lab2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build exercise_unitTest with Maven
+      working-directory: insurance
+      run: mvn -B clean package
+
+    - name: Upload exercise_unitTes artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: exercise_unitTest-1.0-SNAPSHOT
+        path: insurance/target/*.jar
