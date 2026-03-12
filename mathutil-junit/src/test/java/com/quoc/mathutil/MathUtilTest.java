@@ -65,4 +65,21 @@ public class MathUtilTest {
         Assertions.assertEquals(expected, Mathutil.getFactorial(input));
     }
 
-}
+    @Test
+    public void testGetFactorialGivenWrongArgumentThrowException2() {
+        // test for negative input or input greater than 20
+        int[] invalidInputs = {-1, -5, 21, 25};
+        for (int input : invalidInputs) {
+            Exception exception = Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> Mathutil.getFactorial(input)
+            );
+
+            Assertions.assertEquals(
+                    "n must be between 0 .. 20",
+                    exception.getMessage()
+            );
+        }
+
+    }       
+} 
